@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Models.Models;
 
 namespace Models.MappingProfiles
 {
@@ -6,7 +7,11 @@ namespace Models.MappingProfiles
     {
         public MappingProfile()
         {
-            // Define other mappings as needed
+            CreateMap<Store, StoreDTO>().ReverseMap();
+            CreateMap<StoreItem, StoreItemDTO>().ReverseMap();
+            CreateMap<Item, ItemDTO>().ReverseMap();
+            CreateMap<Invoice, InvoiceDTO>().ReverseMap();
+            CreateMap<InvoiceItem, InvoiceItemDTO>().ReverseMap();
         }
     }
 }

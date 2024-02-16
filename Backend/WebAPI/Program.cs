@@ -1,15 +1,16 @@
 using Data;
 using Data.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-using WebAPI;
+using Models.MappingProfiles;
 using Serilog;
+using WebAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Host.UseSerilog((context, services, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration).ReadFrom.Services(services));
-builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -26,7 +27,6 @@ builder.Services.AddSwaggerGen();
 
 //General
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
 // Registering Services
 ConfigureService.RegisterRepositories(builder.Services);
 ConfigureService.RegisterServices(builder.Services);

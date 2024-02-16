@@ -6,7 +6,7 @@ namespace Data.Infrastructure
     {
         private readonly ApplicationDbContext _context;
         private readonly DbSet<T> dbSet;
-        protected BaseRepository(ApplicationDbContext context)
+        public BaseRepository(ApplicationDbContext context)
         {
             _context = context;
             dbSet = _context.Set<T>();
