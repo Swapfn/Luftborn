@@ -1,34 +1,35 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Models.Models;
 using Services.Contracts;
+using Services.Services;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/stores")]
+    [Route("api/invoices")]
     [ApiController]
-    public class StoreController(IStoreService storeService) : ControllerBase
+    public class InvoiceController(IInvoiceService InvoiceService) : ControllerBase
     {
         [HttpGet]
-        public IActionResult GetStores()
+        public IActionResult GetInvoices()
         {
-            return Ok(storeService.GetStores());
+            return Ok(InvoiceService.GetInvoices());
         }
         [HttpGet("{pageNumber},{pageSize}")]
-        public IActionResult GetFilteredStoress(int pageNumber, int pageSize)
+        public IActionResult GetFilteredInvoices(int pageNumber, int pageSize)
         {
-            return Ok(storeService.GetStores(pageNumber, pageSize));
+            return Ok(InvoiceService.GetInvoices(pageNumber, pageSize));
         }
         [HttpGet("{id}")]
-        public IActionResult GetStore(int id)
+        public IActionResult GetInvoice(int id)
         {
-            return Ok(storeService.GetStore(id));
+            return Ok(InvoiceService.GetInvoice(id));
         }
         [HttpPost]
-        public IActionResult AddStore(StoreDTO model)
+        public IActionResult AddInvoice(InvoiceDTO model)
         {
             if (ModelState.IsValid)
             {
-                return Created("", storeService.AddStore(model));
+                return Created("", InvoiceService.AddInvoice(model));
             }
             else
             {
@@ -36,11 +37,11 @@ namespace WebAPI.Controllers
             }
         }
         [HttpPut]
-        public IActionResult UpdateStore(StoreDTO model)
+        public IActionResult UpdateInvoice(InvoiceDTO model)
         {
             if (ModelState.IsValid)
             {
-                return Ok(storeService.UpdateStore(model));
+                return Ok(InvoiceService.UpdateInvoice(model));
             }
             else
             {
@@ -48,11 +49,11 @@ namespace WebAPI.Controllers
             }
         }
         [HttpDelete("{id}")]
-        public IActionResult DeleteStore(int id)
+        public IActionResult DeleteInvoice(int id)
         {
             if (ModelState.IsValid)
             {
-                storeService.DeleteStore(id);
+                InvoiceService.DeleteInvoice(id);
                 return NoContent();
             }
             else

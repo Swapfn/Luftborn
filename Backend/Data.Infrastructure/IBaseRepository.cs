@@ -1,4 +1,6 @@
-﻿namespace Data.Infrastructure
+﻿using Models.DTO;
+
+namespace Data.Infrastructure
 {
     public interface IBaseRepository<T> where T : class
     {
@@ -9,7 +11,7 @@
         void Delete(T entity);
 
         T? GetById(int id);
-
-        IEnumerable<T> GetAll();
+        ICollection<T> GetAll();
+        ICollection<T> GetAll(int pageNumber, int pageSize);
     }
 }

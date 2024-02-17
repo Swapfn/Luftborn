@@ -9,7 +9,7 @@ namespace Data.Repositories.Repositories
     {
         public override Store? GetById(int id)
         {
-            return context.Stores.Where(c => c.Id == id)?.Include(c => c.Items).ThenInclude(c => c.Item).FirstOrDefault();
+            return context.Stores.Where(c => c.Id == id)?.Include(c => c.Items).ThenInclude(c => c.Item).AsNoTracking().FirstOrDefault();
         }
     }
 }

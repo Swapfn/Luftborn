@@ -13,7 +13,7 @@ namespace Services.Services
             Store store = mapper.Map<Store>(model);
             storeRepository.Add(store);
             unitOfWork.SaveChanges();
-            var x  = mapper.Map<StoreDTO>(store);
+            var x = mapper.Map<StoreDTO>(store);
             return x;
         }
 
@@ -31,6 +31,10 @@ namespace Services.Services
         {
             return mapper.Map<StoreDTO>(storeRepository.GetById(id));
 
+        }
+        public ICollection<ItemDTO> GetStores(int pageNumber, int pageSize)
+        {
+            return mapper.Map<List<ItemDTO>>(storeRepository.GetAll(pageNumber, pageSize));
         }
 
         public ICollection<StoreDTO> GetStores()

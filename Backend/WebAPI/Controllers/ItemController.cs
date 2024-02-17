@@ -4,31 +4,31 @@ using Services.Contracts;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/stores")]
+    [Route("api/items")]
     [ApiController]
-    public class StoreController(IStoreService storeService) : ControllerBase
+    public class ItemController(IItemService ItemService) : ControllerBase
     {
         [HttpGet]
-        public IActionResult GetStores()
+        public IActionResult GetItems()
         {
-            return Ok(storeService.GetStores());
+            return Ok(ItemService.GetItems());
         }
         [HttpGet("{pageNumber},{pageSize}")]
-        public IActionResult GetFilteredStoress(int pageNumber, int pageSize)
+        public IActionResult GetFilteredItems(int pageNumber, int pageSize)
         {
-            return Ok(storeService.GetStores(pageNumber, pageSize));
+            return Ok(ItemService.GetItems(pageNumber, pageSize));
         }
         [HttpGet("{id}")]
-        public IActionResult GetStore(int id)
+        public IActionResult GetItem(int id)
         {
-            return Ok(storeService.GetStore(id));
+            return Ok(ItemService.GetItem(id));
         }
         [HttpPost]
-        public IActionResult AddStore(StoreDTO model)
+        public IActionResult AddItem(ItemDTO model)
         {
             if (ModelState.IsValid)
             {
-                return Created("", storeService.AddStore(model));
+                return Created("", ItemService.AddItem(model));
             }
             else
             {
@@ -36,11 +36,11 @@ namespace WebAPI.Controllers
             }
         }
         [HttpPut]
-        public IActionResult UpdateStore(StoreDTO model)
+        public IActionResult UpdateItem(ItemDTO model)
         {
             if (ModelState.IsValid)
             {
-                return Ok(storeService.UpdateStore(model));
+                return Ok(ItemService.UpdateItem(model));
             }
             else
             {
@@ -48,11 +48,11 @@ namespace WebAPI.Controllers
             }
         }
         [HttpDelete("{id}")]
-        public IActionResult DeleteStore(int id)
+        public IActionResult DeleteItem(int id)
         {
             if (ModelState.IsValid)
             {
-                storeService.DeleteStore(id);
+                ItemService.DeleteItem(id);
                 return NoContent();
             }
             else
