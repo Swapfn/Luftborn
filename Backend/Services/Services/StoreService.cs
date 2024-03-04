@@ -31,7 +31,7 @@ namespace Services.Services
 
         public StoreDTO GetStore(int id)
         {
-            var x = storeRepository.QuerySpecification(new AndSpecification<Store>(new GetStoreByIdSpecifications(1), new GetStoreByNameSpecifications("string"))).FirstOrDefault();
+            var x = storeRepository.Get(1, "string");
             return mapper.Map<StoreDTO>(storeRepository.GetById(id));
 
         }

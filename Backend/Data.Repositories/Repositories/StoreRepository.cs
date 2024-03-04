@@ -12,6 +12,15 @@ namespace Data.Repositories.Repositories
         {
             return context.Stores.Where(c => c.Id == id)?.Include(c => c.Items).ThenInclude(c => c.Item).AsNoTracking().FirstOrDefault();
         }
+
+        public Store Get(int id, string name)
+        {
+            var x = QuerySpecification(new AndSpecification<Store>(new GetStoreByIdSpecifications(id), new GetStoreByNameSpecifications(name))).FirstOrDefault();
+            var y = QuerySpecification(new OrSpecification<Store>(new GetStoreByIdSpecifications(2), new GetStoreByNameSpecifications("string1"))).FirstOrDefault();
+            var z = QuerySpecification(new NotSpecification<Store>(new GetStoreByIdSpecifications(1))).FirstOrDefault();
+
+            return x;
+        }
     }
     public class GetStoreByIdSpecifications : Specification<Store>
     {
