@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Models.DTO;
+﻿using Data.Repositories.Specification;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Infrastructure
 {
@@ -38,12 +38,22 @@ namespace Data.Infrastructure
 
         public virtual (ICollection<T>, int) GetAll(int pageNumber, int pageSize)
         {
-            int totalCount =dbSet.Count();
+            int totalCount = dbSet.Count();
             (ICollection<T> Items, int Count) PagedList = (
                 dbSet.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList(),
                 totalCount
             );
             return PagedList;
+        }
+        public IQueryable<T> QuerySpecification(Specification<T> specificaion)
+        {
+            IQueryable<T> _query = _context.Set<T>();
+            if (specificaion.Criteria is not null)
+            {
+                _query = _query.Where(specificaion.Criteria);
+                _ = specificaion.IncludedCriteria.Aggregate(_query, (current, IncludedCriteria) => current.Include(IncludedCriteria));
+            }
+            return _query;
         }
     }
 }

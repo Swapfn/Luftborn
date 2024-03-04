@@ -1,4 +1,4 @@
-﻿using Models.DTO;
+﻿using Data.Repositories.Specification;
 
 namespace Data.Infrastructure
 {
@@ -13,5 +13,7 @@ namespace Data.Infrastructure
         T? GetById(int id);
         ICollection<T> GetAll();
         (ICollection<T> Items, int Count) GetAll(int pageNumber, int pageSize);
+        IQueryable<T> QuerySpecification(Specification<T> specificaion);
+
     }
 }

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Data.Infrastructure;
 using Data.Repositories.Contracts;
+using Data.Repositories.Repositories;
+using Data.Repositories.Specification;
 using Models.Models;
 using Services.Contracts;
 
@@ -29,6 +31,7 @@ namespace Services.Services
 
         public StoreDTO GetStore(int id)
         {
+            var x = storeRepository.QuerySpecification(new AndSpecification<Store>(new GetStoreByIdSpecifications(1), new GetStoreByNameSpecifications("string"))).FirstOrDefault();
             return mapper.Map<StoreDTO>(storeRepository.GetById(id));
 
         }
