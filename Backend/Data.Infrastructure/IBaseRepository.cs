@@ -12,6 +12,6 @@ namespace Data.Infrastructure
 
         T? GetById(int id);
         ICollection<T> GetAll();
-        ICollection<T> GetAll(int pageNumber, int pageSize);
+        (ICollection<T> Items, int Count) GetAll(int pageNumber, int pageSize);
     }
 }

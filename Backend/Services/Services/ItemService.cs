@@ -38,9 +38,12 @@ namespace Services.Services
             return mapper.Map<List<ItemDTO>>(ItemRepository.GetAll());
         }
 
-        public ICollection<ItemDTO> GetItems(int pageNumber, int pageSize)
+        public (ICollection<ItemDTO> Items, int Count) GetItems(int pageNumber, int pageSize)
         {
-            return mapper.Map<List<ItemDTO>>(ItemRepository.GetAll(pageNumber, pageSize));
+            var Items = ItemRepository.GetAll(pageNumber, pageSize);
+            var count = Items.Count;
+            var map = mapper.Map<List<ItemDTO>>(Items.Items);
+            return (map, count);
         }
 
         public ItemDTO UpdateItem(ItemDTO model)

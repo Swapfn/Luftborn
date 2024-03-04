@@ -36,9 +36,13 @@ namespace Data.Infrastructure
             return dbSet.AsNoTracking().ToList();
         }
 
-        public virtual ICollection<T> GetAll(int pageNumber, int pageSize)
+        public virtual (ICollection<T>, int) GetAll(int pageNumber, int pageSize)
         {
-            ICollection<T> PagedList = dbSet.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+            int totalCount =dbSet.Count();
+            (ICollection<T> Items, int Count) PagedList = (
+                dbSet.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList(),
+                totalCount
+            );
             return PagedList;
         }
     }

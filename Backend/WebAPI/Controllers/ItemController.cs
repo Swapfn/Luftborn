@@ -16,7 +16,8 @@ namespace WebAPI.Controllers
         [HttpGet("{pageNumber},{pageSize}")]
         public IActionResult GetFilteredItems(int pageNumber, int pageSize)
         {
-            return Ok(ItemService.GetItems(pageNumber, pageSize));
+            var (Items, Count) = ItemService.GetItems(pageNumber, pageSize);
+            return Ok(new PagedList<ItemDTO>(Items, Count));
         }
         [HttpGet("{id}")]
         public IActionResult GetItem(int id)

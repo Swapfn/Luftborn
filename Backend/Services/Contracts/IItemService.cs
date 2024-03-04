@@ -5,7 +5,7 @@ namespace Services.Contracts
     public interface IItemService
     {
         ICollection<ItemDTO> GetItems();
-        ICollection<ItemDTO> GetItems(int pageNumber, int pageSize);
+        (ICollection<ItemDTO> Items, int Count) GetItems(int pageNumber, int pageSize);
         ItemDTO GetItem(int id);
         ItemDTO AddItem(ItemDTO model);
         ItemDTO UpdateItem(ItemDTO model);
